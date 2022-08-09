@@ -1,0 +1,18 @@
+.score {
+  padding-block: 5vh;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .section {
+    &:nth-child(1) {
+      flex: 1;
+    }
+
+    &:nth-child(2) {
+      display: flex;
+      justify-content: center;
+      flex: 1;
+    }
+  }
+}

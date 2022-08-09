@@ -1,0 +1,35 @@
+.container {
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+
+  width: 100%;
+  padding-inline: 24px;
+  max-width: var(--container-xl);
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    width: var(--container-sm)
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .container {
+    width: var(--container-md)
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .container {
+    width: var(--container-lg)
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .container {
+    width: var(--container-xl)
+  }
+}

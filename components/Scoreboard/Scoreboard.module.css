@@ -1,0 +1,7 @@
+.scoreboard {
+  .cell {
+    padding: 12px 24px;
+    vertical-align: middle;
+    text-align: left;
+  }
+}

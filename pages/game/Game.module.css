@@ -1,0 +1,49 @@
+.game {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .question {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    flex: 2;
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      flex: 1;
+      justify-content: space-evenly;
+
+      .category {
+        text-align: center;
+        font-size: 3em;
+      }
+
+      .questionText {
+        font-size: 4rem;
+        color: var(--color-primary-dark);
+        font-weight: bold;
+        text-align: center;
+      }
+    }
+  }
+
+  .answer {
+    width: 100%;
+    flex: 1;
+
+    .buttons {
+      padding-block: 5em;
+      display: flex;
+      gap: 32px;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  }
+}
