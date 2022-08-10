@@ -1,11 +1,15 @@
 import { useRouter } from 'next/router';
-import React, { createContext, useCallback, useEffect, useMemo, useState } from 'react';
+import React, {
+  createContext, useCallback, useEffect, useMemo, useState,
+} from 'react';
 
 type TQuestionsContext = {
   count: number;
   currentQuestion?: TQuestion;
   isLoading: boolean;
   questions: TQuestion[];
+  hasError: boolean;
+  // eslint-disable-next-line no-unused-vars
   updateAnswers: (answer: TAnswer) => void;
   resetGame: () => void;
 }
@@ -14,6 +18,7 @@ const initialCtx: TQuestionsContext = {
   count: 0,
   currentQuestion: undefined,
   isLoading: false,
+  hasError: false,
   questions: [],
   updateAnswers: () => {
   },
@@ -21,12 +26,12 @@ const initialCtx: TQuestionsContext = {
   },
 };
 
-
 export const QuestionsContext = createContext<TQuestionsContext>(initialCtx);
 
 export default function QuestionsContextProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const [count, setCount] = useState<number>(0);
+  const [hasError, setHasError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [questions, setQuestions] = useState<TQuestion[]>(initialCtx.questions);
 
@@ -39,44 +44,53 @@ export default function QuestionsContextProvider({ children }: { children: React
       const json = await res.json();
 
       if (res.ok) {
-        setQuestions((json.results as TRawQuestion[]).map(({ category, correct_answer, question }) => ({
-          category,
-          correctAnswer: correct_answer,
-          question,
-          answer: null,
-        })));
+        if (json.response_code === 0) {
+          setQuestions((json.results as TRawQuestion[]).map((q) => ({
+            category: q.category,
+            correctAnswer: q.correct_answer,
+            question: q.question,
+            answer: null,
+          })));
 
-        setCount(0);
+          setCount(0);
 
-        setIsLoading(false);
+          setIsLoading(false);
+
+          setHasError(false);
+        } else {
+          setIsLoading(false);
+
+          setHasError(true);
+        }
       } else {
         setIsLoading(false);
 
-        throw new Error(json.error);
+        setHasError(true);
       }
     }
 
-    if (questions.length === 0 && !isLoading) {
+    if (questions.length === 0 && !isLoading && !hasError) {
       fetchQuestions();
     }
-  }, [isLoading, questions]);
+  }, [hasError, isLoading, questions]);
 
   const updateAnswers = useCallback((answer: TAnswer) => {
-    setQuestions(prev => {
-      return prev.map((curr, index) => index === count ? { ...curr, answer } : curr);
-    });
+    setQuestions((prev) => prev.map((curr, i) => (i === count ? { ...curr, answer } : curr)));
 
-    setCount(prev => prev + 1);
+    setCount((prev) => prev + 1);
   }, [count]);
 
-  const currentQuestion = useMemo<TQuestion | undefined>(() => questions[count], [questions, count]);
+  const currentQuestion = useMemo<TQuestion | undefined>(
+    () => questions[count],
+    [questions, count],
+  );
 
   useEffect(() => {
     // Game finished
-    if (count > 9 && currentQuestion === undefined && questions.length > 0) {
+    if (count > 9 && currentQuestion === undefined && questions.length > 0 && !hasError) {
       router.push('/score');
     }
-  }, [count, currentQuestion, questions.length, router]);
+  }, [count, currentQuestion, hasError, questions.length, router]);
 
   const resetGame = useCallback(async () => {
     setQuestions([]);
@@ -84,14 +98,21 @@ export default function QuestionsContextProvider({ children }: { children: React
     await router.push('/');
   }, [router]);
 
+  useEffect(() => {
+    if (hasError) {
+      router.push('/');
+    }
+  }, [hasError, router]);
+
   const values = useMemo(() => ({
     count,
     currentQuestion,
+    hasError,
     isLoading,
     questions,
     resetGame,
     updateAnswers,
-  }), [count, currentQuestion, isLoading, resetGame, questions, updateAnswers]);
+  }), [count, currentQuestion, isLoading, hasError, resetGame, questions, updateAnswers]);
 
   return (
     <QuestionsContext.Provider value={values}>
