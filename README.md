@@ -7,6 +7,7 @@ You can check the deployed project on [https://trivia-app-pink.vercel.app](https
 First, run the development server:
 
 ```bash
+yarn install
 yarn dev
 ```
 
