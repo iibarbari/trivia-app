@@ -1,48 +1,64 @@
 :root {
-  --color-primary-rgb: 255, 255, 255;
-  --color-primary: #f8bbd0;
-  --color-primary-light: #ffeeff;
-  --color-primary-dark: #c48b9f;
-
-  --color-secondary-rgb: 174, 213, 129;
-  --color-secondary: #aed581;
-  --color-secondary-light: #e1ffb1;
-  --color-secondary-dark: #7da453;
+  --color-primary-rgb: 92, 107, 192;
+  --color-primary: #5c6bc0;
+  --color-primary-light: #e8eaf6;
+  --color-primary-dark: #303f9f;
+  --color-secondary-light-rgb: 236, 239, 241;
+  --color-secondary-rgb: 120, 144, 156;
+  --color-secondary: #78909c;
+  --color-secondary-light: #eceff1;
+  --color-secondary-dark: #455a64;
 }
 
 html,
 body {
-  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  padding: 0;
+
+  color: white;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
+    sans-serif;
 }
 
 .cursive {
-  font-family: 'Caveat', cursive, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family:
+    Caveat,
+    cursive,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
+    sans-serif;
 }
 
 .text-shadow {
-  color: var(--color-secondary-light);
-  font-weight: 700;
+  color: var(--color-primary-dark);
   font-size: 1.8rem;
-  text-shadow: 0 1px 0 rgba(196, 136, 156, 0.5),
-  1px 0 0 rgba(196, 136, 156, 0.2),
-  1px 2px 1px rgba(196, 136, 156, 0.8),
-  2px 1px 1px rgba(196, 136, 156, 0.1),
-  2px 3px 2px rgba(196, 136, 156, 0.6),
-  3px 2px 2px rgba(196, 136, 156, 0.4),
-  3px 4px 2px rgba(196, 136, 156, 0.1),
-  4px 3px 3px rgba(196, 136, 156, 0.8),
-  4px 5px 3px rgba(196, 136, 156, 0.2),
-  5px 4px 2px rgba(196, 136, 156, 0.5),
-  5px 6px 2px rgba(196, 136, 156, 0.7),
-  6px 5px 2px rgba(196, 136, 156, 0.9),
-  6px 7px 1px rgba(196, 136, 156, 0.3),
-  7px 6px 1px rgba(196, 136, 156, 0.6),
-  7px 8px 0 rgba(196, 136, 156, 0.8),
-  8px 7px 0 rgba(196, 136, 156, 0.2);
+  font-weight: 700;
+  text-shadow:
+    0 1px 0 rgba(var(--color-secondary-rgb), 50%),
+    1px 0 0 rgba(var(--color-secondary-rgb), 20%),
+    1px 2px 1px rgba(var(--color-secondary-rgb), 80%),
+    2px 1px 1px rgba(var(--color-secondary-rgb), 10%),
+    2px 3px 2px rgba(var(--color-secondary-rgb), 60%),
+    3px 2px 2px rgba(var(--color-secondary-rgb), 40%),
+    3px 4px 2px rgba(var(--color-secondary-rgb), 10%);
 }
 
 a {

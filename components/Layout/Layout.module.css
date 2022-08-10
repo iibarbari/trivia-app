@@ -3,9 +3,8 @@
   background:
     linear-gradient(
       180deg,
-      rgba(174, 213, 129, 100%) 0%,
-      rgba(225, 255, 177, 100%) 33%,
-      rgba(255, 238, 255, 100%) 66%
+      rgba(var(--color-secondary-light-rgb), 100%) 50%,
+      rgba(var(--color-primary-rgb), 20%) 100%
     );
 
   .main {

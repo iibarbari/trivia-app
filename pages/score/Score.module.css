@@ -1,14 +1,16 @@
 .score {
-  padding-block: 5vh;
   display: flex;
   flex-direction: column;
   gap: 32px;
+
+  padding-block: 5vh;
 
   .section {
     display: flex;
     justify-content: center;
 
     .scoreboard {
+      color: var(--color-primary-dark);
       font-size: calc(32px + 2vw);
     }
 

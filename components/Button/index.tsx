@@ -3,15 +3,8 @@ import Link from 'next/link';
 import React, { Ref } from 'react';
 import styles from './Button.module.css';
 
-type TButtonSize = 'sm' | 'lg';
-type TButtonVariant = 'solid' | 'outline';
-type TButtonColor = 'primary' | 'secondary';
-
 type CommonProps = {
-  color?: TButtonColor;
   disabled?: boolean;
-  size?: TButtonSize;
-  variant?: TButtonVariant;
 };
 
 type AnchorProps = React.PropsWithoutRef<JSX.IntrinsicElements['a']>;
@@ -33,10 +26,7 @@ function Button(
   {
     children,
     className,
-    color = 'primary',
     disabled = false,
-    size = 'sm',
-    variant = 'solid',
     ...props
   }: Props,
   ref: Ref<HTMLAnchorElement | HTMLButtonElement>,
@@ -44,9 +34,6 @@ function Button(
   const commonProps = {
     className: classNames(
       styles.button,
-      styles[size],
-      styles[variant],
-      styles[color],
       disabled && styles.disabled,
       className,
     ),

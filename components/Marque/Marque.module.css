@@ -11,13 +11,13 @@
     position: absolute;
     width: 100%;
 
-    animation: scroll 30s linear 0s infinite;
+    animation: scroll 10s linear 0s infinite;
   }
 }
 
 @keyframes scroll {
   from {
-    left: 100%;
+    left: 0;
   }
 
   to {

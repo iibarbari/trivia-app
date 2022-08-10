@@ -34,6 +34,7 @@ export default function QuestionsContextProvider({ children }: { children: React
   const [hasError, setHasError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [questions, setQuestions] = useState<TQuestion[]>(initialCtx.questions);
+  // const [showScoreboard, setShowScoreboard] = useState<boolean>(false);
 
   useEffect(() => {
     async function fetchQuestions() {
@@ -74,11 +75,7 @@ export default function QuestionsContextProvider({ children }: { children: React
     }
   }, [hasError, isLoading, questions]);
 
-  const updateAnswers = useCallback((answer: TAnswer) => {
-    setQuestions((prev) => prev.map((curr, i) => (i === count ? { ...curr, answer } : curr)));
-
-    setCount((prev) => prev + 1);
-  }, [count]);
+  const goToHome = useCallback(() => router.push('/'), [router]);
 
   const currentQuestion = useMemo<TQuestion | undefined>(
     () => questions[count],
@@ -86,23 +83,22 @@ export default function QuestionsContextProvider({ children }: { children: React
   );
 
   useEffect(() => {
-    // Game finished
-    if (count > 9 && currentQuestion === undefined && questions.length > 0 && !hasError) {
-      router.push('/score');
+    if (hasError) {
+      goToHome();
     }
-  }, [count, currentQuestion, hasError, questions.length, router]);
+  }, [goToHome, hasError]);
+
+  const updateAnswers = useCallback((answer: TAnswer) => {
+    setQuestions((prev) => prev.map((curr, i) => (i === count ? { ...curr, answer } : curr)));
+
+    setCount((prev) => prev + 1);
+  }, [count]);
 
   const resetGame = useCallback(async () => {
     setQuestions([]);
 
-    await router.push('/');
-  }, [router]);
-
-  useEffect(() => {
-    if (hasError) {
-      router.push('/');
-    }
-  }, [hasError, router]);
+    setCount(0);
+  }, []);
 
   const values = useMemo(() => ({
     count,

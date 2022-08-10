@@ -40,7 +40,7 @@ const Home: NextPage = () => {
       {!hasError && (
         <div className={styles.section}>
           <Link href="/game" passHref>
-            <Button size="lg">Begin?</Button>
+            <Button>Begin?</Button>
           </Link>
         </div>
       )}

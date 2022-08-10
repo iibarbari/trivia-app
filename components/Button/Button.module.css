@@ -1,4 +1,9 @@
 .button {
+  --focus-shadow: var(--button-box-shadow) rgb(var(--color-primary-rgb), 40%);
+  --solid-button-bg: var(--color-primary);
+  --solid-button-color: white;
+  --outline-button-color: var(--color-primary-dark);
+  --link-button-color: var(--color-primary);
   --button-box-shadow: 0 0 0 3px;
 
   display: inline-flex;
@@ -6,6 +11,10 @@
   align-items: center;
   justify-content: center;
   width: auto;
+
+  height: 56px;
+  padding-inline-start: 24px;
+  padding-inline-end: 24px;
 
   transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
 
@@ -17,6 +26,12 @@
   outline: transparent solid 2px;
   outline-offset: -2px;
 
+  background-color: var(--solid-button-bg);
+
+  color: var(--solid-button-color);
+
+  font-size: 20px;
+
   font-weight: 500;
   line-height: 1.2;
   vertical-align: middle;
@@ -24,6 +39,21 @@
   cursor: pointer;
   user-select: none;
   appearance: none;
+
+  &:not(.disabled) {
+    &:active {
+      transform: scale(0.9);
+    }
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &:global(.focus-visible),
+    &:focus {
+      box-shadow: var(--focus-shadow);
+    }
+  }
 
   &button {
     white-space: nowrap;
@@ -38,108 +68,5 @@
     opacity: 0.4;
 
     cursor: not-allowed;
-  }
-
-  &.sm {
-    height: 32px;
-    padding-inline-start: 12px;
-    padding-inline-end: 12px;
-
-    font-size: 16px;
-  }
-
-  &.lg {
-    height: 56px;
-    padding-inline-start: 24px;
-    padding-inline-end: 24px;
-
-    font-size: 20px;
-  }
-
-  &.primary {
-    --focus-shadow: var(--button-box-shadow) rgb(var(--color-primary-rgb), 40%);
-    --solid-button-bg: var(--color-primary);
-    --solid-button-color: black;
-    --outline-button-color: var(--color-primary-dark);
-    --link-button-color: var(--color-primary);
-  }
-
-  &.secondary {
-    --focus-shadow: var(--button-box-shadow) rgb(var(--color-secondary-rgb), 40%);
-    --solid-button-bg: var(--color-secondary);
-    --solid-button-color: black;
-    --outline-button-color: var(--color-secondary-dark);
-    --link-button-color: var(--color-secondary);
-    --link-button-bg-active: var(--color-secondary-dark);
-  }
-
-  &.link {
-    height: auto;
-
-    padding-inline: 0;
-
-    background-color: transparent;
-
-    color: var(--link-button-color);
-
-    &:not(.disabled) {
-      &:active,
-      &:hover {
-        transform: scale(0.9);
-      }
-
-      &:global(.focus-visible),
-      &:focus {
-        transform: scale(1.1);
-      }
-    }
-  }
-
-  &.solid {
-    background-color: var(--solid-button-bg);
-
-    color: var(--solid-button-color);
-
-    &.secondary {
-      border: 1px solid var(--solid-button-color);
-    }
-
-    &:not(.disabled) {
-      &:active {
-        transform: scale(0.9);
-      }
-
-      &:hover {
-        transform: scale(1.1);
-      }
-
-      &:global(.focus-visible),
-      &:focus {
-        box-shadow: var(--focus-shadow);
-      }
-    }
-  }
-
-  &.outline {
-    border: 1px solid currentcolor;
-
-    background-color: transparent;
-
-    color: var(--outline-button-color);
-
-    &:not(.disabled) {
-      &:active {
-        transform: scale(0.9);
-      }
-
-      &:hover {
-        transform: scale(1.1);
-      }
-
-      &:global(.focus-visible),
-      &:focus {
-        box-shadow: var(--focus-shadow);
-      }
-    }
   }
 }
