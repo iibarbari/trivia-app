@@ -1,6 +1,6 @@
 # Trivia App
 
-You can check the deployed project on [https://trivia-app-pink.vercel.app/score](https://trivia-app-pink.vercel.app/score)
+You can check the deployed project on [https://trivia-app-pink.vercel.app](https://trivia-app-pink.vercel.app)
 
 ## Run project on your local 
 
