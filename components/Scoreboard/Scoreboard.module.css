@@ -1,7 +1,37 @@
 .scoreboard {
-  .cell {
-    padding: 12px 24px;
-    vertical-align: middle;
-    text-align: left;
+  overflow-x: auto;
+
+  .table {
+    min-width: 520px;
+    border-radius: 8px;
+    overflow: hidden;
+    border-collapse: collapse;
+
+    .row {
+      &.right {
+        background: var(--color-secondary);
+      }
+
+      &.wrong {
+        background: var(--color-primary);
+      }
+    }
+
+    .cell {
+      padding: 16px;
+      vertical-align: middle;
+      text-align: left;
+
+      &.fixed {
+        width: 100px;
+      }
+
+      svg {
+        display: block;
+        width: 16px;
+        height: 16px;
+        margin: 0 auto;
+      }
+    }
   }
 }

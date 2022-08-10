@@ -25,14 +25,14 @@
         text-align: center;
 
         .title {
-          font-size: 5em;
+          font-size: calc(48px + 4vw);
           margin-bottom: 16px;
           color: var(--color-primary-dark);
         }
 
         .subTitle {
           color: var(--color-primary-dark);
-          font-size: 1.2em;
+          font-size: calc(15px + 0.390625vw);
         }
       }
     }

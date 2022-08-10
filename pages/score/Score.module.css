@@ -2,17 +2,18 @@
   padding-block: 5vh;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 32px;
 
   .section {
-    &:nth-child(1) {
-      flex: 1;
+    display: flex;
+    justify-content: center;
+
+    .scoreboard {
+      font-size: calc(32px + 2vw);
     }
 
-    &:nth-child(2) {
-      display: flex;
-      justify-content: center;
-      flex: 1;
+    &.cta {
+      margin-top: 24px;
     }
   }
 }

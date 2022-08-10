@@ -20,11 +20,10 @@
 
       .category {
         text-align: center;
-        font-size: 3em;
       }
 
       .questionText {
-        font-size: 4rem;
+        font-size: calc(32px + 2vw);
         color: var(--color-primary-dark);
         font-weight: bold;
         text-align: center;

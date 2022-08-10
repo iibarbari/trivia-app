@@ -1,31 +1,34 @@
+import { useRouter } from 'next/router';
 import React, { createContext, useCallback, useEffect, useMemo, useState } from 'react';
 
 type TQuestionsContext = {
-  questions: TQuestion[];
-  answers: TAnswer[];
   count: number;
   currentQuestion?: TQuestion;
-  updateAnswers: (answer: TAnswer) => void;
   isLoading: boolean;
+  questions: TQuestion[];
+  updateAnswers: (answer: TAnswer) => void;
+  resetGame: () => void;
 }
 
 const initialCtx: TQuestionsContext = {
-  questions: [],
-  answers: [],
   count: 0,
   currentQuestion: undefined,
+  isLoading: false,
+  questions: [],
   updateAnswers: () => {
   },
-  isLoading: true,
+  resetGame: () => {
+  },
 };
+
 
 export const QuestionsContext = createContext<TQuestionsContext>(initialCtx);
 
 export default function QuestionsContextProvider({ children }: { children: React.ReactNode }) {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [questions, setQuestions] = useState<TQuestion[]>(initialCtx.questions);
-  const [answers, setAnswers] = useState<TAnswer[]>(initialCtx.answers);
+  const router = useRouter();
   const [count, setCount] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [questions, setQuestions] = useState<TQuestion[]>(initialCtx.questions);
 
   useEffect(() => {
     async function fetchQuestions() {
@@ -43,7 +46,7 @@ export default function QuestionsContextProvider({ children }: { children: React
           answer: null,
         })));
 
-        setAnswers([...new Array(json.results.length).fill(null)]);
+        setCount(0);
 
         setIsLoading(false);
       } else {
@@ -53,9 +56,10 @@ export default function QuestionsContextProvider({ children }: { children: React
       }
     }
 
-    fetchQuestions();
-  }, []);
-
+    if (questions.length === 0 && !isLoading) {
+      fetchQuestions();
+    }
+  }, [isLoading, questions]);
 
   const updateAnswers = useCallback((answer: TAnswer) => {
     setQuestions(prev => {
@@ -65,11 +69,29 @@ export default function QuestionsContextProvider({ children }: { children: React
     setCount(prev => prev + 1);
   }, [count]);
 
-
   const currentQuestion = useMemo<TQuestion | undefined>(() => questions[count], [questions, count]);
 
-  const values = useMemo(() => ({ questions, answers, count, currentQuestion, updateAnswers, isLoading }),
-    [answers, questions, count, currentQuestion, updateAnswers, isLoading]);
+  useEffect(() => {
+    // Game finished
+    if (count > 9 && currentQuestion === undefined && questions.length > 0) {
+      router.push('/score');
+    }
+  }, [count, currentQuestion, questions.length, router]);
+
+  const resetGame = useCallback(async () => {
+    setQuestions([]);
+
+    await router.push('/');
+  }, [router]);
+
+  const values = useMemo(() => ({
+    count,
+    currentQuestion,
+    isLoading,
+    questions,
+    resetGame,
+    updateAnswers,
+  }), [count, currentQuestion, isLoading, resetGame, questions, updateAnswers]);
 
   return (
     <QuestionsContext.Provider value={values}>
