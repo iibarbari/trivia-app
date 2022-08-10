@@ -3,9 +3,10 @@
 
   .table {
     min-width: 520px;
-    border-radius: 8px;
     overflow: hidden;
     border-collapse: collapse;
+
+    border-radius: 8px;
 
     .row {
       &.right {
@@ -19,8 +20,9 @@
 
     .cell {
       padding: 16px;
-      vertical-align: middle;
+
       text-align: left;
+      vertical-align: middle;
 
       &.fixed {
         width: 100px;

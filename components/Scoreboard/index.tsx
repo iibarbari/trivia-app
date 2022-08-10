@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { useContext } from 'react';
-import { QuestionsContext } from '../../contexts';
 import he from 'he';
+import { QuestionsContext } from '../../contexts';
 import { MinusIcon, PlusIcon } from '../../icons';
 import styles from './Scoreboard.module.css';
 
@@ -14,14 +14,18 @@ export default function Scoreboard({ children, ...props }: Props) {
     <div {...props} className={styles.scoreboard}>
       <table className={styles.table}>
         <tbody>
-          {questions.map((question, i) => (
+          {questions.map((question) => (
             <tr
-              key={i}
-              className={classNames(styles.row,
-                question.answer === question.correctAnswer ? styles.right : styles.wrong)}
+              className={classNames(
+                styles.row,
+                question.answer === question.correctAnswer ? styles.right : styles.wrong,
+              )}
+              key={question.question}
             >
-              <td className={classNames(styles.cell,styles.fixed)}>{question.answer === question.correctAnswer ? <PlusIcon /> :
-                <MinusIcon />}</td>
+              <td className={classNames(styles.cell, styles.fixed)}>
+                {question.answer === question.correctAnswer ? <PlusIcon />
+                  : <MinusIcon />}
+              </td>
 
               <td className={styles.cell}>{he.decode(question.question)}</td>
             </tr>

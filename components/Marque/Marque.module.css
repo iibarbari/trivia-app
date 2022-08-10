@@ -1,15 +1,17 @@
 .marque {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   width: 100%;
   padding-block: 32px;
+
   white-space: nowrap;
 
   .line {
-    width: 100%;
-    animation: scroll 30s linear 0s infinite;
     position: absolute;
+    width: 100%;
+
+    animation: scroll 30s linear 0s infinite;
   }
 }
 
@@ -19,6 +21,6 @@
   }
 
   to {
-    left: -100%
+    left: -100%;
   }
 }

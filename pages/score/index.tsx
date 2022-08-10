@@ -8,40 +8,39 @@ import { QuestionsContext } from '../../contexts';
 import styles from './Score.module.css';
 
 const Score: NextPage = () => {
-    const router = useRouter();
-    const { questions, resetGame, currentQuestion } = useContext(QuestionsContext);
-    const score = useMemo<number>(() =>
-        questions.filter(({ answer, correctAnswer }) => answer === correctAnswer).length,
-      [questions]);
+  const router = useRouter();
+  const { questions, resetGame, currentQuestion } = useContext(QuestionsContext);
+  const score = useMemo<number>(
+    () => questions.filter(({ answer, correctAnswer }) => answer === correctAnswer).length,
+    [questions],
+  );
 
-    useEffect(() => {
-      if (currentQuestion !== undefined) {
-        router.push('/');
-      }
-    }, [currentQuestion, router]);
+  useEffect(() => {
+    if (currentQuestion !== undefined) {
+      router.push('/');
+    }
+  }, [currentQuestion, router]);
 
-    return (
-      <Layout className={styles.score}>
-        <Container className={styles.section}>
-          <p className={classNames('text-shadow', styles.scoreboard)}>{`Your score is ${score} / 10`}</p>
-        </Container>
+  return (
+    <Layout className={styles.score}>
+      <Container className={styles.section}>
+        <p className={classNames('text-shadow', styles.scoreboard)}>{`Your score is ${score} / 10`}</p>
+      </Container>
 
-        <Container className={styles.section}>
-          <Scoreboard />
-        </Container>
+      <Container className={styles.section}>
+        <Scoreboard />
+      </Container>
 
-        <Container className={classNames(styles.section, styles.cta)}>
-          <Button
-            size="lg"
-            type="button"
-            onClick={() => resetGame()}
-          >
-            Play Again?
-          </Button>
-        </Container>
-      </Layout>
-    );
-  }
-;
-
+      <Container className={classNames(styles.section, styles.cta)}>
+        <Button
+          onClick={() => resetGame()}
+          size="lg"
+          type="button"
+        >
+          Play Again?
+        </Button>
+      </Container>
+    </Layout>
+  );
+};
 export default Score;

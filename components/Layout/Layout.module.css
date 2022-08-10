@@ -1,20 +1,21 @@
 .layout {
   background: rgb(174, 213, 129);
-  background: linear-gradient(
-                  180deg,
-                  rgba(174, 213, 129, 1) 0%,
-                  rgba(225, 255, 177, 1) 33%,
-                  rgba(255, 238, 255, 1) 66%
-  );
+  background:
+    linear-gradient(
+      180deg,
+      rgba(174, 213, 129, 100%) 0%,
+      rgba(225, 255, 177, 100%) 33%,
+      rgba(255, 238, 255, 100%) 66%
+    );
 
   .main {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    max-width: 100vw;
 
     min-height: 100vh;
-    max-width: 100vw;
 
     overflow-x: hidden;
   }

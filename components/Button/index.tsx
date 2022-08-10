@@ -66,6 +66,7 @@ function Button(
   if (isButtonProps(props)) {
     return (
       <button
+        /* eslint-disable-next-line react/button-has-type */
         type={(props.type as ButtonProps['type']) === undefined ? 'button' : props.type}
         {...commonProps}
         {...props}

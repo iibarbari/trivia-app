@@ -7,7 +7,9 @@ import { QuestionsContext } from '../../contexts';
 import styles from './Game.module.css';
 
 const Game: NextPage = () => {
-  const { currentQuestion, updateAnswers, isLoading, count } = useContext(QuestionsContext);
+  const {
+    currentQuestion, updateAnswers, isLoading, count,
+  } = useContext(QuestionsContext);
 
   if (isLoading) {
     return <Layout>Loading...</Layout>;
@@ -31,9 +33,9 @@ const Game: NextPage = () => {
 
       <section className={styles.answer}>
         <Container className={styles.buttons}>
-          <Button type="button" size="lg" onClick={() => updateAnswers('True')}>True</Button>
+          <Button onClick={() => updateAnswers('True')} size="lg" type="button">True</Button>
 
-          <Button type="button" size="lg" onClick={() => updateAnswers('False')}>False</Button>
+          <Button onClick={() => updateAnswers('False')} size="lg" type="button">False</Button>
         </Container>
       </section>
     </Layout>
